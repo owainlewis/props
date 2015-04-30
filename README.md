@@ -6,13 +6,9 @@ A small Clojure library for working with java.util.Properties
 
 ```clojure
 
-(require [io.forward/props :as props])
+(require [io.forward/props :refer :all])
 
-(def properties
-  (with-props
-    {:host "http://localhost"
-	 :port 8080}))
-
+;; TODO
 
 ```
 
