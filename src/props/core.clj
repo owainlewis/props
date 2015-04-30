@@ -36,4 +36,15 @@
       (for [[k v] props]
         [(keyword k) v]))))
 
-(defn prop-as-int [properties k])
+;; ******************************************************
+;; Accessors
+;;
+;; These can be used for safe dynamic casting from properties files
+;;
+;; ******************************************************
+
+(defn get-int [properties k])
+
+(defn get-string [properties k])
+
+(defn get-bool [properties k])
