@@ -1,29 +1,39 @@
 (ns props.core
+  (:require [clojure.java.io :as io])
   (:import [java.util Properties]))
 
-(defn names [^Properties props]
+(def ^:private resource-stream
+  (comp io/input-stream io/resource))
+
+(defn string-property-names [^Properties props]
   "Returns a set of keys in this property list where the key and its corresponding
    value are strings, including distinct keys in the default property list if a
-   key of the same name has not already been found from the main properties list.
-
-   Properties whose key or value is not of type String are omitted.
-   The returned set is not backed by the Properties object.
-   Changes to this Properties are not reflected in the set, or vice versa."
+   key of the same name has not already been found from the main properties list"
   (.stringPropertyNames props))
 
-(defn property-names [^Properties props]
-  "Returns an enumeration of all the keys in this property list,
-   including distinct keys in the default property list if a key of the same
-   name has not already been found from the main properties list."
-  )
-
-(defn with-props
-  [props]
-  "Sets and returns java.util.Properties from a Clojure map"
+(defn from-map
+  [props-map]
+  ^{:doc "Sets and returns java.util.Properties from a Clojure map"}
   (let [properties (Properties.)]
-    (doseq [[k v] props]
+    (doseq [[k v] props-map]
       (.setProperty properties (name k) (str v)))
   properties))
 
-(defn load-props [properties-file-name]
-  )
+(defn load-props
+  [properties-file-name]
+  ^{:doc "Loads a properties file from the class path and returns as a java
+          Properties object"}
+  (with-open [stream (resource-stream properties-file-name)]
+    (when ((complement nil?) stream)
+      (doto (Properties.)
+        (.load stream)))))
+
+(defn load-kw-props
+  [properties-file-name]
+  ^{:doc "Same as load-props but will return the key as a keyword"}
+  (let [props (load-props properties-file-name)]
+    (into {}
+      (for [[k v] props]
+        [(keyword k) v]))))
+
+(defn prop-as-int [properties k])
