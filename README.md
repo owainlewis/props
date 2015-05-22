@@ -8,8 +8,8 @@ A small Clojure library for working with java.util.Properties
 
 (require [io.forward/props :refer :all])
 
-;; TODO
-
+(from-map { :protocol "ssl" :port 3000 } )
+;; => java.util.Properties
 ```
 
 ## License
