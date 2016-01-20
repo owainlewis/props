@@ -35,7 +35,3 @@
     (into {}
       (for [[k v] props]
         [(keyword k) v]))))
-
-(defn get-int [properties k])
-(defn get-string [properties k])
-(defn get-bool [properties k])
