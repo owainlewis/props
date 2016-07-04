@@ -1,4 +1,4 @@
-(defproject props "0.1.0-SNAPSHOT"
+(defproject props "0.1.0"
   :description "Small library for working with java.util.Properties"
   :url "http://github.com/owainlewis/props"
   :license {:name "Eclipse Public License"
