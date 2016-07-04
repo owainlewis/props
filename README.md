@@ -5,11 +5,9 @@ A small Clojure library for working with java.util.Properties
 ## Usage
 
 ```clojure
-
 (require [io.forward/props :refer :all])
 
 (from-map { :protocol "ssl" :port 3000 } )
-;; => java.util.Properties
 ```
 
 ## License
